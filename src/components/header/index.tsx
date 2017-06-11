@@ -5,8 +5,7 @@ import { sessionStore } from "src/stores"
 import { History } from "history"
 import { FormattedMessage as FM } from "react-intl"
 import styled from "styled-components"
-
-import "./style.less"
+import { colors } from "src/components/styled"
 
 interface IHeaderProps {
   history: History
@@ -16,20 +15,18 @@ interface IHeaderProps {
 export class Header extends React.Component<IHeaderProps, void> {
 
   async logout() {
-    const isSuccess = await sessionStore.logout()
-    if (isSuccess) {
-      this.props.history.push("/login")
-    }
+    await sessionStore.logout()
+    this.props.history.push("/login")
   }
 
   render() {
     return (
       <StyledHeader>
         <div>
-          <h1 style={{margin: 0}}><FM id="app.name" /></h1>
+          <Brand><FM id="app.name" /></Brand>
         </div>
-        <div>
-          <button onClick={this.logout} type="logout" />
+        <div style={{display: "flex", alignItems: "center"}}>
+          <LinkButton onClick={this.logout} type="logout"><FM id="common.logout" /></LinkButton>
         </div>
       </StyledHeader>
     )
@@ -43,4 +40,20 @@ const StyledHeader = styled.header`
   border-bottom: 1px solid #DDDDDD;
   display: flex;
   justify-content: space-between;
+`
+
+const Brand = styled.h1`
+  color: ${colors.main};
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 0;
+`
+
+const LinkButton = styled.a`
+  color: ${colors.main};
+  font-size: 14px;
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
 `

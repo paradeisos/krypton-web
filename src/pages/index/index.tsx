@@ -7,6 +7,7 @@ import { Route } from "react-router-dom"
 import { Header } from "src/components/header"
 import styled from "styled-components"
 import { Page, TEMP } from "src/components/styled"
+import { MainPage } from "src/pages/main"
 
 @observer
 export class IndexPage extends React.Component<RouteComponentProps<void>, void> {
@@ -17,7 +18,7 @@ export class IndexPage extends React.Component<RouteComponentProps<void>, void> 
         <Header history={this.props.history} />
         <main>
           <div className="sub-pages">
-            <Route exact={true} path="/main" component={TEMP} />
+            <Route exact={true} path="/main" component={MainPage} />
           </div>
         </main>
       </FlexPage>

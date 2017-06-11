@@ -3,5 +3,6 @@
   "app.copyright": "Copyright © 2017 Paradeisos. 保留所有权利",
   "common.email": "邮箱",
   "common.password": "密码",
-  "common.login": "登录"
+  "common.login": "登录",
+  "common.logout": "登出"
 }

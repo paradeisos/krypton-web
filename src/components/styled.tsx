@@ -16,6 +16,12 @@ export const Page = styled.div`
   overflow: auto;
 `
 
+export const SubPage = styled.div`
+  width: 960px;
+  padding: 10px 0;
+  margin: 0 auto;
+`
+
 export const TEMP = () => {
   const DIV = styled.div`
     border: 1px solid black;

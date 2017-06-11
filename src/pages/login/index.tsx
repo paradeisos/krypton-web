@@ -31,7 +31,7 @@ export class LoginPage extends React.Component<RouteComponentProps<void>, void> 
     }
     const isSuccess = await sessionStore.login({ username: this.username, password: this.password })
     if (isSuccess) {
-      this.props.history.push("/")
+      this.props.history.push("/main")
     } else {
       this.isError = true
     }
