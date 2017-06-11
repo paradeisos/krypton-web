@@ -25,6 +25,7 @@ export class SessionAPI {
   }
 
   public static logout(): Promise<ISession> {
-    return axios.delete(`${API_PREFIX}/logout`).then((res) => res.data.data)
+    // return axios.delete(`${API_PREFIX}/logout`).then((res) => res.data.data)
+    return sleep<ISession>(1)
   }
 }

@@ -8,10 +8,7 @@ import { sessionStore, localeStore } from "src/stores"
 import { ILoginParams } from "src/apis"
 import { FormattedMessage as FM } from "react-intl"
 import styled from "styled-components"
-
-const mainColor = "#FF7C81"
-const subColor = "#FAC090"
-const inputBackground = "#FEF4C1"
+import { Page, colors } from "src/components/styled"
 
 @observer
 @autobind
@@ -57,14 +54,6 @@ export class LoginPage extends React.Component<RouteComponentProps<void>, void> 
   }
 }
 
-const Page = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-`
-
 const Footer = () => {
   const P = styled.p`
     text-align: center;
@@ -84,7 +73,7 @@ const Footer = () => {
 
 const Brand = styled.h1`
   text-align: center;
-  color: ${mainColor};
+  color: ${colors.main};
   font-size: 28px;
   text-transform: uppercase;
 `
@@ -107,7 +96,7 @@ const Form = styled.form`
 
 const FormItemStyle = `
   margin: 5px 0;
-  border: 1px solid ${subColor};
+  border: 1px solid ${colors.sub};
   border-radius: 4px;
   width: 100%;
   outline: none;
@@ -117,8 +106,8 @@ const FormItemStyle = `
 const Input = styled.input`
   ${FormItemStyle}
   padding: 0 10px;
-  color: ${mainColor};
-  background: ${inputBackground};
+  color: ${colors.main};
+  background: ${colors.inputBackground};
   line-height: 32px;
 `
 
@@ -127,7 +116,7 @@ const Button = styled.button`
   text-align: center;
   font-weight: 500;
   border: none;
-  background: ${mainColor};
+  background: ${colors.main};
   color: #ffffff;
   height: 38px;
   :hover {

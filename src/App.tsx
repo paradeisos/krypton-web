@@ -15,6 +15,7 @@ import { sessionStore, localeStore } from "./stores"
 import DevTools from "mobx-react-devtools"
 import { PageLoading } from "./components/page-loading"
 import { LoginPage } from "./pages/login"
+import { IndexPage } from "./pages/index"
 
 @observer
 @autobind
@@ -35,10 +36,10 @@ export class App extends React.Component<null, null> {
             <Router>
               <Switch>
                 <Route exact={true} path="/login" component={LoginPage} />
-                <Route path="/" component={Temp} />
+                <Route path="/" component={IndexPage} />
               </Switch>
             </Router>
-            <DevTools />
+            {/*<DevTools />*/}
           </div>
         </IntlProvider>
       )
@@ -50,8 +51,4 @@ export class App extends React.Component<null, null> {
     await sessionStore.userinfo()
     this.isChecking = false
   }
-}
-
-const Temp = () => {
-  return <div>Temp</div>
 }
