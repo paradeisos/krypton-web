@@ -58,7 +58,6 @@ export class Tomato extends React.Component<any, any> {
     this.intervalTimer = null
     this.tomatoState = TomatoState.stoped
     this.leftSeconds = 0
-    window.alex = this
   }
 
   handleTick() {
