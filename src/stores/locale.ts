@@ -64,3 +64,10 @@ class LocaleStore {
 }
 
 export const localeStore = new LocaleStore()
+export const Languages = [{
+  title: "简体中文",
+  name: "zh-Hans-CN"
+}, {
+  title: "English",
+  name: "en-US"
+}]
