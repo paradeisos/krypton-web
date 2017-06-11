@@ -40,6 +40,7 @@ const StyledHeader = styled.header`
   border-bottom: 1px solid #DDDDDD;
   display: flex;
   justify-content: space-between;
+  flex-shrink: 0;
 `
 
 const Brand = styled.h1`

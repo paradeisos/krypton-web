@@ -21,7 +21,10 @@ export class SessionAPI {
 
   public static userinfo(): Promise<ISession> {
     // return axios.get(`${API_PREFIX}/user`).then((res) => res.data.data)
-    return sleep<ISession>(1)
+    return sleep<ISession>(0.2, {
+      id: "1",
+      name: "alex"
+    })
   }
 
   public static logout(): Promise<ISession> {

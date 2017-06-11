@@ -4,8 +4,15 @@ import styled from "styled-components"
 export const colors = {
   main: "#FF7C81",
   sub: "#FAC090",
-  inputBackground: "#FEF4C1"
+  inputBackground: "#FEF4C1",
+  border: "#DDDDDD"
 }
+
+export const Card = styled.div`
+  border-radius: 4px;
+  border: 1px solid ${colors.border};
+  padding: 10px;
+`
 
 export const Page = styled.div`
   position: absolute;

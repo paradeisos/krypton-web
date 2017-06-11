@@ -39,7 +39,7 @@ export class App extends React.Component<null, null> {
                 <Route path="/" component={IndexPage} />
               </Switch>
             </Router>
-            {/*<DevTools />*/}
+            <DevTools />
           </div>
         </IntlProvider>
       )
