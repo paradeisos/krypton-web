@@ -1,6 +1,7 @@
 import axios from "axios"
 import { API_PREFIX } from "./config"
 import { ISession } from "src/models"
+import { sleep } from "src/utils"
 
 export interface ILoginParams {
   username: string
@@ -15,7 +16,8 @@ export class SessionAPI {
   }
 
   public static userinfo(): Promise<ISession> {
-    return axios.get(`${API_PREFIX}/user`).then((res) => res.data.data)
+    // return axios.get(`${API_PREFIX}/user`).then((res) => res.data.data)
+    return sleep<ISession>(3)
   }
 
   public static logout(): Promise<ISession> {
