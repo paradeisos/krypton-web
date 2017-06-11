@@ -14,6 +14,7 @@ import { sessionStore, localeStore } from "./stores"
 
 import DevTools from "mobx-react-devtools"
 import { PageLoading } from "./components/page-loading"
+import { LoginPage } from "./pages/login"
 
 @observer
 @autobind
@@ -30,12 +31,15 @@ export class App extends React.Component<null, null> {
     } else {
       return (
         <IntlProvider locale={localeStore.config.locale} messages={localeStore.config.messages}>
-          <Router>
-            <Switch>
-              <Route exact={true} path="/login" component={Temp} />
-              <Route path="/" component={Temp} />
-            </Switch>
-          </Router>
+          <div>
+            <Router>
+              <Switch>
+                <Route exact={true} path="/login" component={LoginPage} />
+                <Route path="/" component={Temp} />
+              </Switch>
+            </Router>
+            <DevTools />
+          </div>
         </IntlProvider>
       )
     }

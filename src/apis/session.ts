@@ -10,14 +10,18 @@ export interface ILoginParams {
 
 export class SessionAPI {
   public static login(params: ILoginParams): Promise<ISession> {
-    return axios.post(`${API_PREFIX}/login`, {
-      ...params
-    }).then((res) => res.data.data)
+    // return axios.post(`${API_PREFIX}/login`, {
+    //   ...params
+    // }).then((res) => res.data.data)
+    return sleep<ISession>(1, {
+      id: "1",
+      name: "alex"
+    })
   }
 
   public static userinfo(): Promise<ISession> {
     // return axios.get(`${API_PREFIX}/user`).then((res) => res.data.data)
-    return sleep<ISession>(3)
+    return sleep<ISession>(1)
   }
 
   public static logout(): Promise<ISession> {

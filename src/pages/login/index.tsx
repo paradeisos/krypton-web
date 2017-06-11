@@ -1,0 +1,136 @@
+import * as React from "react"
+import { autobind } from "core-decorators"
+import { RouteComponentProps } from "react-router-dom"
+import { observable, computed } from "mobx"
+import { observer } from "mobx-react"
+import { LocaleSwitch } from "src/components/locale-switch"
+import { sessionStore, localeStore } from "src/stores"
+import { ILoginParams } from "src/apis"
+import { FormattedMessage as FM } from "react-intl"
+import styled from "styled-components"
+
+const mainColor = "#FF7C81"
+const subColor = "#FAC090"
+const inputBackground = "#FEF4C1"
+
+@observer
+@autobind
+export class LoginPage extends React.Component<RouteComponentProps<void>, void> {
+
+  @observable isError = false
+  @observable username
+  @observable password
+
+  handleInput(attrName: string) {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
+      this[attrName] = event.target.value
+    }
+  }
+
+  async onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!this.username || !this.password) {
+      return
+    }
+    const isSuccess = await sessionStore.login({ username: this.username, password: this.password })
+    if (isSuccess) {
+      this.props.history.push("/")
+    } else {
+      this.isError = true
+    }
+  }
+
+  render() {
+    return (
+      <Page>
+        <Main>
+          <Brand><FM id="app.name" /></Brand>
+          <Form onSubmit={this.onSubmit}>
+            <Input placeholder={localeStore.messages["common.email"]} type="text" value={this.username} onChange={this.handleInput("username")} />
+            <Input placeholder={localeStore.messages["common.password"]} type="password" value={this.password} onChange={this.handleInput("password")} />
+            <Button><FM id="common.login" /></Button>
+          </Form>
+        </Main>
+        <Footer />
+      </Page>
+    )
+  }
+}
+
+const Page = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+`
+
+const Footer = () => {
+  const P = styled.p`
+    text-align: center;
+  `
+  const style = {
+    width: "100%",
+    position: "absolute" as any,
+    bottom: 20
+  }
+  return (
+    <footer style={style}>
+      <P><FM id="app.copyright" /></P>
+      <LocaleSwitch />
+    </footer>
+  )
+}
+
+const Brand = styled.h1`
+  text-align: center;
+  color: ${mainColor};
+  font-size: 28px;
+  text-transform: uppercase;
+`
+const Main = styled.main`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -40px;
+`
+
+const Form = styled.form`
+  width: 250px;
+  margin: 0 auto;
+`
+
+const FormItemStyle = `
+  margin: 5px 0;
+  border: 1px solid ${subColor};
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+`
+
+const Input = styled.input`
+  ${FormItemStyle}
+  padding: 0 10px;
+  color: ${mainColor};
+  background: ${inputBackground};
+  line-height: 32px;
+`
+
+const Button = styled.button`
+  ${FormItemStyle}
+  text-align: center;
+  font-weight: 500;
+  border: none;
+  background: ${mainColor};
+  color: #ffffff;
+  height: 38px;
+  :hover {
+    opacity: 0.9;
+  }
+`

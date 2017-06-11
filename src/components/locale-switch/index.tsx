@@ -8,14 +8,17 @@ import { observer } from "mobx-react"
 @autobind
 export class LocaleSwitch extends React.Component<any, any> {
 
-  handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    localeStore.switch(e.target.value)
+  handleChange(e: React.MouseEvent<HTMLDivElement>) {
+    const target = e.target as HTMLLinkElement
+    if (target.dataset.id) {
+      localeStore.switch(target.dataset.id)
+    }
   }
 
   render() {
     return (
-      <SwitchGroup>
-        {Languages.map((i) => (<SwitchButton>{i.title}</SwitchButton>))}
+      <SwitchGroup onClick={this.handleChange}>
+        {Languages.map((i) => (<SwitchButton data-id={i.name} key={i.name}>{i.title}</SwitchButton>))}
       </SwitchGroup>
     )
   }
@@ -28,4 +31,6 @@ const SwitchGroup = styled.div`
 const SwitchButton = styled.a`
   color: #FF7C81;
   display: inline-block;
+  margin: 0 2px;
+  cursor: pointer;
 `
