@@ -13,6 +13,9 @@ import {
 import { sessionStore, localeStore } from "./stores"
 
 import DevTools from "mobx-react-devtools"
+import { PageLoading } from "./components/page-loading"
+import { LoginPage } from "./pages/login"
+import { IndexPage } from "./pages/index"
 
 @observer
 @autobind
@@ -24,7 +27,7 @@ export class App extends React.Component<null, null> {
   render() {
     if (this.isChecking) {
       return (
-        <div>Loading...</div>
+        <PageLoading />
       )
     } else {
       return (
@@ -32,10 +35,11 @@ export class App extends React.Component<null, null> {
           <div>
             <Router>
               <Switch>
-                <Route exact={true} path="/login" component={Temp} />
-                <Route path="/" component={Temp} />
+                <Route exact={true} path="/login" component={LoginPage} />
+                <Route path="/" component={IndexPage} />
               </Switch>
             </Router>
+            <DevTools />
           </div>
         </IntlProvider>
       )
@@ -44,11 +48,7 @@ export class App extends React.Component<null, null> {
 
   async componentWillMount() {
     this.isChecking = true
-    const isSuccess = await sessionStore.userinfo()
+    await sessionStore.userinfo()
     this.isChecking = false
   }
-}
-
-const Temp = () => {
-  return <div>Temp</div>
 }
