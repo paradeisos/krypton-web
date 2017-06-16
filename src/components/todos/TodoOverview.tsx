@@ -1,9 +1,8 @@
 import * as React from "react"
-import { autobind } from "core-decorators"
-import { observable, computed } from "mobx"
-import { observer } from "mobx-react"
 import styled from "styled-components"
-import { colors, Card } from "src/components/styled"
+import { autobind } from "core-decorators"
+import { observer } from "mobx-react"
+import { colors } from "src/components/styled"
 import { ITodo } from "src/models"
 
 interface ITodoOverviewProps {
@@ -26,11 +25,13 @@ export class TodoOverview extends React.Component<ITodoOverviewProps, any> {
     return (
       <Wrapper>
         {this.props.todoStore.todos.map((todo) => {
-          const labelStyle = {}
+          let labelStyle = {}
           if (todo.finished) {
-            labelStyle["textDecoration"] = "line-through"
-            labelStyle["fontStyle"] = "italic"
-            labelStyle["color"] = colors.border
+            labelStyle = {
+              textDecoration: "line-through",
+              fontStyle: "italic",
+              color: colors.border
+            }
           }
           return (
             <TodoItem>

@@ -1,12 +1,10 @@
 import * as React from "react"
 import { RouteComponentProps } from "react-router-dom"
-import { observable } from "mobx"
 import { observer } from "mobx-react"
 import { sessionStore } from "src/stores"
 import { Route } from "react-router-dom"
 import { Header } from "src/components/header"
-import styled from "styled-components"
-import { Page, TEMP } from "src/components/styled"
+import { Page } from "src/components/styled"
 import { MainPage } from "src/pages/main"
 
 @observer

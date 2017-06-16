@@ -21,7 +21,7 @@ class LocaleStore {
 
   @computed
   get messages() {
-    return this.config.messages
+    return this.config && this.config.messages
   }
 
   constructor() {

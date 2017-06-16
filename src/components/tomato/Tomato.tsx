@@ -1,12 +1,9 @@
 import * as React from "react"
+import styled from "styled-components"
 import { autobind } from "core-decorators"
-import { RouteComponentProps } from "react-router-dom"
 import { observable, computed } from "mobx"
 import { observer } from "mobx-react"
-import { sessionStore } from "src/stores"
-import styled from "styled-components"
 import { colors, Card } from "src/components/styled"
-import { CircleProgress } from "src/components/circle-progress"
 import { Circle } from "rc-progress"
 
 enum TomatoState {
@@ -21,7 +18,7 @@ export class Tomato extends React.Component<any, any> {
   @observable leftSeconds = 0
   @observable totalSeconds = 60 * 25
   @observable tomatoState = TomatoState.stoped
-  intervalTimer = null
+  intervalTimer: number
 
   @computed get percentage() {
     return (1 - (this.leftSeconds / this.totalSeconds)) * 100
@@ -83,9 +80,17 @@ export class Tomato extends React.Component<any, any> {
           <Circle {...circleProps} />
           <TimeLabel>{this.timeLeft}</TimeLabel>
         </CircleWrapper>
-        {this.tomatoState === TomatoState.running ? <ControlButton onClick={this.onCancel}>取消</ControlButton> : <ControlButton onClick={this.onStart}>开始</ControlButton>}
+        {this.renderControls()}
       </TomatoWrapper>
     )
+  }
+
+  renderControls() {
+    if (this.tomatoState === TomatoState.running) {
+      return <ControlButton onClick={this.onCancel}>取消</ControlButton>
+    } else {
+      return <ControlButton onClick={this.onStart}>开始</ControlButton>
+    }
   }
 
 }

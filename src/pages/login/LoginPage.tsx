@@ -1,22 +1,21 @@
 import * as React from "react"
 import { autobind } from "core-decorators"
 import { RouteComponentProps } from "react-router-dom"
-import { observable, computed } from "mobx"
+import { observable } from "mobx"
 import { observer } from "mobx-react"
 import { LocaleSwitch } from "src/components/locale-switch"
 import { sessionStore, localeStore } from "src/stores"
-import { ILoginParams } from "src/apis"
 import { FormattedMessage as FM } from "react-intl"
 import styled from "styled-components"
 import { Page, colors } from "src/components/styled"
 
 @observer
 @autobind
-export class LoginPage extends React.Component<RouteComponentProps<void>, void> {
+export class LoginPage extends React.Component<RouteComponentProps<{}>, {}> {
 
   @observable isError = false
-  @observable username
-  @observable password
+  @observable username: string
+  @observable password: string
 
   handleInput(attrName: string) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +37,22 @@ export class LoginPage extends React.Component<RouteComponentProps<void>, void> 
   }
 
   render() {
+    const getInputProps = (placeholderId: string, type: string, fieldName: string) => {
+      return {
+        placeholder: localeStore.messages[placeholderId],
+        type,
+        value: this[fieldName],
+        onChange: this.handleInput(fieldName)
+      }
+    }
+
     return (
       <Page>
         <Main>
           <Brand><FM id="app.name" /></Brand>
           <Form onSubmit={this.onSubmit}>
-            <Input placeholder={localeStore.messages["common.email"]} type="text" value={this.username} onChange={this.handleInput("username")} />
-            <Input placeholder={localeStore.messages["common.password"]} type="password" value={this.password} onChange={this.handleInput("password")} />
+            <Input {...getInputProps("common.email", "text", "username")} />
+            <Input {...getInputProps("common.password", "password", "password")} />
             <Button><FM id="common.login" /></Button>
           </Form>
         </Main>

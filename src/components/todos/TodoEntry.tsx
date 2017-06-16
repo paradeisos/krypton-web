@@ -1,10 +1,8 @@
 import * as React from "react"
-import { autobind } from "core-decorators"
-import { observable, computed } from "mobx"
-import { observer } from "mobx-react"
 import styled from "styled-components"
-import { colors, Card } from "src/components/styled"
-import { ITodo } from "src/models"
+import { autobind } from "core-decorators"
+import { observer } from "mobx-react"
+import { colors } from "src/components/styled"
 
 const ENTER_KEY = 13
 

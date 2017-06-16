@@ -1,5 +1,4 @@
 import * as React from "react"
-import { RouteComponentProps } from "react-router-dom"
 import { autobind } from "core-decorators"
 import { sessionStore } from "src/stores"
 import { History } from "history"

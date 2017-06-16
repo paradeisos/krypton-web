@@ -1,13 +1,13 @@
 import * as React from "react"
 import { autobind } from "core-decorators"
-import { observable, computed } from "mobx"
+import { observable } from "mobx"
 import { observer } from "mobx-react"
-import { sessionStore } from "src/stores"
-import styled from "styled-components"
-import { colors, Card } from "src/components/styled"
-import { TodoEntry } from "./todo-entry"
-import { TodoOverview } from "./todo-overview"
+
 import { ITodo } from "src/models"
+import { Card } from "src/components/styled"
+
+import { TodoEntry } from "./TodoEntry"
+import { TodoOverview } from "./TodoOverview"
 
 @observer
 @autobind

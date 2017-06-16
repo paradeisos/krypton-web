@@ -1,5 +1,4 @@
 import * as React from "react"
-import { FormattedMessage as FM } from "react-intl"
 import styled from "styled-components"
 
 const loaderImg = require("./flask-loader.svg")
