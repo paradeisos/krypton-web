@@ -1,54 +1,44 @@
 import * as React from "react"
 import { autobind } from "core-decorators"
-import { observable } from "mobx"
-import { observer } from "mobx-react"
+import { observer, Provider } from "mobx-react"
 import { IntlProvider } from "react-intl"
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from "react-router-dom"
+import { Router, Route, Switch } from "react-router-dom"
 
-import { sessionStore, localeStore } from "./stores"
+import stores, { localeStore, sessionStore, routeStore } from "src/stores"
 
-import DevTools from "mobx-react-devtools"
+import { PageLoading } from "./components/page-loading"
+import { LoginPage } from "./pages/login"
+import { IndexPage } from "./pages/index"
 
 @observer
 @autobind
 export class App extends React.Component<null, null> {
 
-  @observable
-  isChecking = true
-
   render() {
-    if (this.isChecking) {
+    if (sessionStore.isFetching) {
       return (
-        <div>Loading...</div>
+        <PageLoading />
       )
     } else {
       return (
-        <IntlProvider locale={localeStore.config.locale} messages={localeStore.config.messages}>
-          <div>
-            <Router>
+        <Provider {...stores}>
+          <IntlProvider locale={localeStore.config.locale} messages={localeStore.config.messages}>
+            <Router history={routeStore.history}>
               <Switch>
-                <Route exact={true} path="/login" component={Temp} />
-                <Route path="/" component={Temp} />
+                <Route exact={true} path="/login" component={LoginPage} />
+                <Route path="/" component={IndexPage} />
               </Switch>
             </Router>
-          </div>
-        </IntlProvider>
+          </IntlProvider>
+        </Provider>
       )
     }
   }
 
   async componentWillMount() {
-    this.isChecking = true
-    const isSuccess = await sessionStore.userinfo()
-    this.isChecking = false
+    await sessionStore.fetchSession()
+    if (!sessionStore.session) {
+      routeStore.history.push("/login")
+    }
   }
-}
-
-const Temp = () => {
-  return <div>Temp</div>
 }
